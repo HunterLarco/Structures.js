@@ -1,0 +1,145 @@
+<html>
+<style>
+
+body{
+  padding:0px;
+  margin:0px;
+  
+  font-size:18px;
+  font-family:Arial;
+}
+.center{
+  width:400px;
+  margin:0px auto;
+  padding:50px;
+  
+  display:block;
+  
+  text-align:center;
+}
+p{
+  font-weight:700;
+}
+
+
+input{
+  padding:12px 18px;
+  
+  border:1px solid rgb(200,200,200);
+  outline:none;
+  
+  width:100%;
+  
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing:    border-box;
+	box-sizing:         border-box;
+  
+  font-size:18px;
+}
+input:hover{
+  border-color:rgb(160,160,160);
+}
+input:focus{
+  border-color:rgb(102,181,215);
+  
+  box-shadow:inset 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+.words{
+  padding:20px 0px;
+  
+  color:rgb(51,51,51);
+}
+.words div{
+  padding:5px 0px;
+  background:rgb(240,240,240);
+}
+.words div:first-child{
+  padding-top:10px;
+}
+.words div:last-child{
+  padding-bottom:10px;
+}
+.words:after{
+  content:'showing the first five matches';
+  display:block;
+  
+  font-size:12px;
+  font-style:italic;
+  color:rgb(100,100,100);
+  
+  padding-top:20px;
+}
+
+</style>
+<head>
+<script src='../../src/util/Overload.min.js'></script>
+<script src='../../src/TrieTree.js'></script>
+</head>
+<body>
+
+<div class='center'>
+  <p>Begin typing to see word completion</p>
+  <input type='text' placeholder='Pusillanimous'/>
+  <div class='words'>
+    <div>Loading Dictionary</div>
+  </div>
+</div>
+
+<script>
+window.onload = function(){
+  
+  var tree;
+  function ClearWords(){
+    document.querySelector('.words').innerHTML = '';
+  }
+  function AddWords(words){
+    for(var i=0,word; word=words[i++];){
+      var div = document.createElement('div');
+      div.innerHTML = word;
+      document.querySelector('.words').appendChild(div);
+    }
+  }
+  function AutoComplete(event){
+    const max_suggestions = 5;
+  
+    ClearWords();
+  
+    var input = event.target,
+        value = input.value.split(' ').slice(-1)[0];
+  
+    if(value.length == 0) return;
+  
+    var root = tree.get(value),
+        words = [];
+  
+    var undefined;
+    if(root == undefined) return;
+  
+    root.traverse(function(node){
+      if(node.isend()) words.push(node.value());
+      return words.length == max_suggestions;
+    });
+  
+    AddWords(words);
+  }
+  
+  function Init(){
+    tree = new TrieTree(Dictionary);
+    document.querySelector('.words div').innerHTML = 'Dictionary Loaded';
+    document.querySelector('input').addEventListener('keyup', AutoComplete);
+  }
+  
+  function LoadDictionary(){
+    var script = document.createElement('script');
+    script.setAttribute('src', 'Dictionary.js');
+    script.addEventListener('load', Init);
+    document.head.appendChild(script);
+  }
+  
+  LoadDictionary();
+  
+};
+</script>
+</body>
+</html>
