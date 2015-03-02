@@ -14,7 +14,7 @@ tree.traverse(function(node){
 ```
 
 ## Installation
-Download [color.min.js](./build/Structures.min.js) and place it in your project's root directory
+Download [Structures.min.js](./build/Structures.min.js) and place it in your project's root directory
 ```html
 <script type='text/javascript' src='Structures.min.js'></script>
 ```
