@@ -2,6 +2,7 @@
   
   function TrieTree(){
     var self = this;
+    var undefined;
     
     var data = {},
         isend = false,
@@ -20,7 +21,18 @@
       var letter = word[0];
       if(!data[letter]) data[letter] = new TrieTree(word.substring(1), value+letter);
       else Get(letter).add(word.substring(1), value+letter);
-    }, ['string', 'string']);   
+    }, ['string', 'string']);
+    
+    var Remove = Overload.function();
+    Remove.overload(function(){
+      isend = false;
+    });
+    Remove.overload(function(word){
+      var node = Get(word);
+      if(!node || !node.isend()) return false;
+      node.remove();
+      return true;
+    }, ['string']);
    
     function ToMap(){
       var output = {isend: IsEnd(), value: GetValue()};
@@ -33,14 +45,7 @@
       return output;
     }
     function Contains(word){
-      var undefined;
-      if(word == undefined) return false;
-      
-      if(word.length == 0) return IsEnd();
-      
-      var letter = word[0];
-      if(!!data[letter]) return Get(letter).contains(word.substring(1));
-      else return false;
+      return Get(word) != undefined;
     }
     function IsEnd(){
       return isend;
@@ -71,7 +76,6 @@
       if(word.length == 0) return self;
       
       var node = data[word[0]];
-      var undefined;
       if(node == undefined) return undefined;
       
       return node.get(word.substring(1));
@@ -84,6 +88,7 @@
     self.contains = Contains;
     self.traverse = Traverse;
     self.value = GetValue;
+    self.remove = Remove;
     
     var Constructor = Overload.function();
     Constructor.overload(function(words){
