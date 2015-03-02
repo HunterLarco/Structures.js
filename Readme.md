@@ -22,3 +22,4 @@ Download [Structures.min.js](./build/Structures.min.js) and place it in your pro
 ## Included Structures
 
 * TrieTree
+* BinarySearchTree
