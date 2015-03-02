@@ -19,7 +19,7 @@ Download [Structures.min.js](./build/Structures.min.js) and place it in your pro
 <script type='text/javascript' src='Structures.min.js'></script>
 ```
 
-## Included Structures
+## Documentation
 
-* TrieTree
-* BinarySearchTree
+* [TrieTree](./docs/TrieTree.md)
+* [BinarySearchTree](./docs/BinarySearchTree.md)

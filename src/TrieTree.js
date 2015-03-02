@@ -34,12 +34,12 @@
       return true;
     }, ['string']);
    
-    function ToMap(){
+    function ToJson(){
       var output = {isend: IsEnd(), value: GetValue()};
       
       for(var key in data){
         var node = data[key];
-        output[key] = node.toMap();
+        output[key] = node.toJSON();
       }
       
       return output;
@@ -84,7 +84,7 @@
     self.get = Get;
     self.isend = IsEnd;
     self.add = Add;
-    self.toMap = ToMap;
+    self.toJSON = ToJson;
     self.contains = Contains;
     self.traverse = Traverse;
     self.value = GetValue;
