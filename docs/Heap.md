@@ -31,4 +31,4 @@ heap.clear();
 * `.clear()`
 * `.clone()`
 * `.size()`
-* `.contains()`
+* `.contains(object)`

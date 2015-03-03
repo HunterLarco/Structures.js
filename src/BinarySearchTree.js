@@ -4,107 +4,107 @@
     var self = this;
     var undefined;
     
-    var left,
-        right,
-        key,
-        value;
-    
-    function GetValue(){
-      return value;
+    var data = [],
+        compareTo = function(a,b){return a>b;};
+
+    function LeftChild(parent_index){
+      return parent_index*2+1;
     }
-    function GetLeft(){
-      return left;
+    function RightChild(parent_index){
+      return LeftChild(parent_index)+1;
     }
-    function GetRight(){
-      return right;
+    function Parent(child_index){
+      return Math.floor(child_index/2+.5)-1;
     }
-    function GetKey(){
-      return key;
-    }
-    
-    var Add = Overload.function();
-    Add.overload(function(value){
-      Add(value, value);
-    }, ['number']);
-    Add.overload(function(_key, _value){
-      if(!key){
-        key = _key;
-        value = _value;
+
+    function Push(value){
+      if(data.length == 0){
+        data.push(value);
         return;
       }
       
-      if(_key > key){
-        if(!right) right = new BinarySearchTree(_key, _value);
-        else right.add(_key, _value);
-      }else{
-        if(!left) left = new BinarySearchTree(_key, _value);
-        else left.add(_key, _value);
+      PrivatePush(value, 0);
+    }
+    function PrivatePush(value, index){
+      if(data[index] == undefined){
+        data[index] = value;
+        return;
       }
-    }, ['number', '*']);
-    
-    function ToMap(){
-      return {
-        left: !!left ? left.toMap() : null,
-        right: !!right ? right.toMap() : null,
-        key: key,
-        value: value
-      };
-    }
-    function Contains(_key){
-      return Get(_key) != undefined;
-    }
-    
-    var Get = Overload.function();
-    Get.overload(function(){
-      return {
-        left: left,
-        right: right,
-        key: key,
-        value: value
-      };
-    });
-    Get.overload(function(_key){
-      if(key == _key) return value;
       
-      if(_key > key) return !!right ? right.get(_key) : undefined;
-      else return !!left ? left.get(_key) : undefined;
-    });
+      if(compareTo(value, data[index])) PrivatePush(value, RightChild(index));
+      else PrivatePush(value, LeftChild(index));
+    }
     
     // in order traversal
     function Traverse(funct){
-      var response;
+      return PrivateTraverse(0, funct);
+    }
+    function PrivateTraverse(index, funct){
+      if(data[index] == undefined) return;
       
-      if(!!left) response = left.traverse(funct);
-      if(!!response) return response;
+      PrivateTraverse(LeftChild(index), funct);
+      var response = funct(data[index], self);
+      if(response != undefined) return response;
+      PrivateTraverse(RightChild(index), funct);
+    }
+    function Sort(){
+      var arr = [];
       
-      var response = funct(self);
-      if(!!response) return response;
+      Traverse(function(value){
+        arr.push(value);
+      });
       
-      if(!!right) response = right.traverse(funct);
-      if(!!response) return response;
+      return arr;
     }
     
-    self.add = Add;
-    self.toMap = ToMap;
-    self.contains = Contains;
+    function Clear(){
+      data = [];
+    }
+    function Clone(){
+      return new BinarySearchTree(data, compareTo);
+    }
     
-    self.get = Get;
+    var Contains = Overload.function();
+    Contains.overload(function(value){
+      return this(value, function(a,b){return a==b;});
+    });
+    Contains.overload(function(value, funct){
+      return PrivateContains(0, value, funct);
+    }, ['*', 'function']);
+    function PrivateContains(index, value, isequal){
+      if(data[index] == undefined) return false;
+      if(isequal(data[index], value)) return true;
+      
+      if(compareTo(value, data[index])) return PrivateContains(RightChild(index), value, isequal);
+      else return PrivateContains(LeftChild(index), value, isequal);
+    }
+    
+    function Size(){
+      return data.length;
+    }
+    
+    self.push = Push;
     
     self.traverse = Traverse;
+    self.sort = Sort;
     
-    self.value = GetValue;
-    self.left = GetLeft;
-    self.right = GetRight;
-    self.key = GetKey;
+    self.clear = Clear;
+    self.clone = Clone;
+    
+    self.contains = Contains;
+    self.size = Size;
     
     var Constructor = Overload.function();
-    Constructor.overload(function(values){
-      for(var i=0,val; val=values[i++];) Add(val);
+    Constructor.overload(function(funct){
+      this([], funct);
+    }, ['function']);
+    Constructor.overload(function(arr){
+      this(arr, compareTo);
     }, ['array']);
-    Constructor.overload(function(_key, _value){
-      key = _key;
-      value = _value;
-    }, ['number', '*']);
+    Constructor.overload(function(arr, funct){
+      compareTo = funct;
+      for(var i=0; i<arr.length; i++) Push(arr[i]);
+    }, ['array', 'function']);
     Constructor.apply(self, arguments);
   }
   

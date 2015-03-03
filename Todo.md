@@ -3,6 +3,6 @@
 * BinarySearchTree
   * Write `Remove` method
     * `Remove(node)`
-    * `Removee(key)`
+    * `Remove(key)`
 * Heap
   * Improve `.contains(object)` efficiency
