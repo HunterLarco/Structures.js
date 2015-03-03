@@ -1,6 +1,6 @@
 # TrieTree
 
-> [Wikipedia Article](http://en.wikipedia.org/wiki/Trie)
+> [Wikipedia Article](http://en.wikipedia.org/wiki/Trie)&ensp;&middot;&ensp;[TrieTree.js](../src/TrieTree.js)
 
 ## Example
 

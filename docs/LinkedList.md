@@ -1,6 +1,6 @@
 # LinkedList
 
-> [Wikipedia Article](http://en.wikipedia.org/wiki/Linked_list)
+> [Wikipedia Article](http://en.wikipedia.org/wiki/Linked_list)&ensp;&middot;&ensp;[LinkedList.js](../src/LinkedList.js)
 
 ## Example
 
