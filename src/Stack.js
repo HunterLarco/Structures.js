@@ -31,6 +31,15 @@
       return data.length;
     }
     
+    function ToArray(){
+      var ouput = [];
+      
+      for(var i=0; i<data.length; i++)
+        output.push(data[i]);
+      
+      return output;
+    }
+    
     self.peek = Peek;
     self.pop = Pop;
     self.push = Push;
@@ -41,6 +50,8 @@
     self.contains = Contains;
     
     self.length = Length;
+    
+    self.toArray = ToArray;
     
     var Constructor = Overload.function();
     Constructor.overload(function(arr){

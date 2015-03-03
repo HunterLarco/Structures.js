@@ -28,3 +28,4 @@ stack.clear();
 * `contains(object)` Returns true if the given object is in the stack, otherwise false
 * `clone()` Clones the stack
 * `clear()` Clears the stack
+* `toArray()`
