@@ -1,6 +1,6 @@
 # Stack
 
-> [Wikipedia Article](http://en.wikipedia.org/wiki/Stack_%29abstract_data_type%29)&ensp;&middot;&ensp;[Stack.js](../src/Stack.js)
+> [Wikipedia Article](http://en.wikipedia.org/wiki/Stack_%28abstract_data_type%29)&ensp;&middot;&ensp;[Stack.js](../src/Stack.js)
 
 ## Example
 
