@@ -36,6 +36,4 @@ tree.traverse(function(node){
 * `.get(word)` Returns the node at the end of the given word, undefined if the word isn't in the tree.
 * `.get()` Returns an object containing the private data of the node.
 
-Note
-
-Each node acts as it's own tree. Thus all methods work on nodes. It is advisable to use a single node as the root and not call `add` on any nodes except for the root, though doing so will not cause an error.
+***Note*** Each node acts as it's own tree. Thus all methods work on nodes. It is advisable to use a single node as the root and not call `add` on any nodes except for the root, though doing so will not cause an error.
