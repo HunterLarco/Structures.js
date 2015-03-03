@@ -9,7 +9,7 @@
     var prev = self,
         next = self,
         value;
-    var IsRoot, SetRoot;
+    var IsRoot, SetRoot, DecrementSize;
     
     function InsertAfter(node){
       node.setNext(next);
@@ -53,6 +53,8 @@
       prev.setNext(next);
       next.setPrev(prev);
       
+      DecrementSize();
+      
       if(IsRoot(self)) SetRoot(self != next ? next : undefined);
     }
     
@@ -70,10 +72,11 @@
     self.remove = Remove;
     
     var Constructor = Overload.function();
-    Constructor.overload(function(_value, _IsRoot, _SetRoot){
+    Constructor.overload(function(_value, _IsRoot, _SetRoot, _DecrementSize){
       value = _value;
       IsRoot = _IsRoot;
       SetRoot = _SetRoot;
+      DecrementSize = _DecrementSize;
     });
     Constructor.apply(self, arguments);
   }
@@ -91,12 +94,15 @@
     function SetRoot(node){
       root = node;
     }
+    function DecrementSize(){
+      size--;
+    }
     
     function Push(value){
       size++;
       
-      if(!root) root = new LinkedListNode(value, IsRoot, SetRoot);
-      else root.insertBefore(new LinkedListNode(value, IsRoot, SetRoot));
+      if(!root) root = new LinkedListNode(value, IsRoot, SetRoot, DecrementSize);
+      else root.insertBefore(new LinkedListNode(value, IsRoot, SetRoot, DecrementSize));
     }
     function Get(index){
       if(!root) return undefined;
@@ -114,7 +120,6 @@
       if(GetLength() == 1) return Clear();
       
       Get(index).remove();
-      size--;
       
       return true;
     }
@@ -173,10 +178,7 @@
     function Filter(funct){
       Traverse(function(node, index, list){
         var response = funct(node, index, list);
-        if(response === false){
-          node.remove();
-          size--;
-        }
+        if(response === false) node.remove();
       });
     }
     
@@ -186,7 +188,6 @@
       
       for(var i=0; i<Math.min(GetLength(), deleteCount); i++){
         node.remove();
-        size--;
         deleted.push(node.getValue());
         node = node.getNext();
       }

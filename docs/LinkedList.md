@@ -5,16 +5,16 @@
 ## Example
 
 ```javascript
-var tree = new Structures.LinkedList([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+var list = new Structures.LinkedList([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-tree.filter(function(node, index, list){
+list.filter(function(node, index, list){
   return Math.sqrt(node.getValue()) % 1 === 0;
 });
-tree = tree.map(function(node, index, list){
+list = list.map(function(node, index, list){
   return Math.sqrt(node.getValue());
 });
 
-console.log(tree.toArray());
+console.log(list.toArray());
 ```
 
 ## Methods
