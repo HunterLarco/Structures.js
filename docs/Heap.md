@@ -5,7 +5,7 @@
 ## Example
 
 ```javascript
-var heap = new Structures.MaxHeap();
+var heap = new Structures.Heap();
 for(var i=0; i<100; i++) heap.push(Math.random()*100);
 console.log(heap.sort());
 

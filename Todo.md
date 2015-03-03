@@ -4,5 +4,5 @@
   * Write `Remove` method
     * `Remove(node)`
     * `Removee(key)`
-* MaxHeap
+* Heap
   * Improve `.contains(object)` efficiency

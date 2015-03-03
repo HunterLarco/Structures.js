@@ -22,6 +22,7 @@ Download [Structures.min.js](./build/Structures.min.js) and place it in your pro
 ## Documentation
 
 * [TrieTree](./docs/TrieTree.md)
+* [Heap](./docs/Heap.md)
 * [BinarySearchTree](./docs/BinarySearchTree.md)
 * [LinkedList](./docs/LinkedList.md)
 * [Stack](./docs/Stack.md)
