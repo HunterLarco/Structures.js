@@ -7,7 +7,7 @@
 ```javascript
 var stack = new Structures.Stack(['apple', 'tree', 'pie']);
 
-console.log(stack.peak() == 'pie');
+console.log(stack.peek() == 'pie');
 console.log(stack.pop() == 'pie');
 console.log(stack.length() == 2);
 console.log(stack.contains('apple') == true);

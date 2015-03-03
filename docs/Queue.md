@@ -5,15 +5,17 @@
 ## Example
 
 ```javascript
-var stack = new Structures.Stack(['apple', 'tree', 'pie']);
+var queue = new Structures.Queue(['apple', 'tree', 'pie']);
 
-console.log(stack.peak() == 'pie');
-console.log(stack.pop() == 'pie');
-console.log(stack.length() == 2);
-console.log(stack.contains('apple') == true);
+console.log(queue.peak() == 'apple');
+console.log(queue.poll() == 'apple');
+console.log(queue.length() == 2);
+console.log(queue.contains('apple') == false);
 
-var dup = stack.clone();
-stack.clear();
+var dup = queue.clone();
+queue.clear();
+
+console.log(dup.toArray());
 ```
 
 ## Methods
