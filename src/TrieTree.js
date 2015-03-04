@@ -45,7 +45,8 @@
       return output;
     }
     function Contains(word){
-      return Get(word) != undefined;
+      var node = Get(word);
+      return node != undefined && node.isend();
     }
     function IsEnd(){
       return isend;
@@ -81,6 +82,18 @@
       return node.get(word.substring(1));
     }, ['string']);
     
+    function HasChildren(){
+      for(var key in data) return true;
+      return false;
+    }
+    function GetChildren(){
+      var arr = [];
+      
+      for(var key in data) arr.push(key);
+      
+      return arr;
+    }
+    
     self.get = Get;
     self.isend = IsEnd;
     self.add = Add;
@@ -89,6 +102,8 @@
     self.traverse = Traverse;
     self.value = GetValue;
     self.remove = Remove;
+    self.hasChildren = HasChildren;
+    self.getChildren = GetChildren;
     
     var Constructor = Overload.function();
     Constructor.overload(function(words){
